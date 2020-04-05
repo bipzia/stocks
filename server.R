@@ -11,8 +11,8 @@ server <- function(input, output, session) {
     df_indices <- df_indices[df_indices$name == input$stock,]
     my_value <- paste0(df_indices$symbole, '.PA')
     
-    df_PA <- getSymbols(my_value, from = Sys.Date() - lubridate::years(1), auto.assign = FALSE)
-    #BNP.PA <- adjustOHLC(BNP.PA)
+    df_PA <- getSymbols(my_value, auto.assign = FALSE)
+    #df_PA <- adjustOHLC(df_PA)
     
     df_PA_SMA_fast <- SMA(Cl(df_PA), n = as.numeric(input$fast_mma))
     df_PA_SMA_slow <- SMA(Cl(df_PA), n = as.numeric(input$slow_mma))
